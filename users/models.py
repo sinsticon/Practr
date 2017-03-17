@@ -12,6 +12,6 @@ class student(models.Model):
 
 class student_details(models.Model):
     username=models.ForeignKey(student,on_delete=models.CASCADE)
-    creativiy=models.IntegerField
-    presentation=models.IntegerField
-    overall=models.IntegerField
+    creativiy=models.IntegerField(default=0)
+    presentation=models.IntegerField(default=0)
+    overall=models.IntegerField(default=0)
