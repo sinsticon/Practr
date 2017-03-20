@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
 ]
 
+
+AUTH_USER_MODEL = 'users.student'
+#AUTHENTICATION_BACKENDS = ('users.backends.CustonUserAuth')
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
