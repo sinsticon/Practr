@@ -26,19 +26,11 @@ def index(request):
         user = auth.authenticate(email=username,password=password)
         if user is not None:
             auth.login(request,user)
-            return HttpResponse("<h1>Logged in</h1>")
+            return HttpResponseRedirect('/profile_page/')
     context={"form":form, "formin":formin}
     return render(request,'home/index.html',context)
 
 
-def user_page(request):
-    context={}
-    return render(request,'user_page/user_page.html',context)
-
-
-def login_view(request):
-    form = LoginForm(request.POST or None)
-    if form.is_valid():
-        username= form.cleaned_data.get("username")
-        password = form.cleaned_data.get("password")
-    context ={"form":form}
+def user_logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect('/home/')
