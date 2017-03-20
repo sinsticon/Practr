@@ -7,21 +7,21 @@ from time import timezone
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password, name, phoneno):
         if not email:
             raise ValueError("No username entered")
         email = self.normalize_email(email)
-        new_user = self.model(email=email,**extra_fields)
+        new_user = self.model(email=email,name=name, phoneno=phoneno)
         new_user.set_password(password)
         new_user.is_staff=True
         new_user.save(using=self._db)
         return new_user
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_superuser(self, email, password, name, phoneno):
         if not email:
             raise ValueError("No username entered")
         email = self.normalize_email(email)
-        new_user = self.model(email=email,**extra_fields)
+        new_user = self.model(email=email,name=name, phoneno=phoneno)
         new_user.set_password(password)
         new_user.is_staff = True
         new_user.is_superuser = True
