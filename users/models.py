@@ -60,6 +60,7 @@ class student(AbstractBaseUser):
 
     def get_name(self):
         return self.name
+
     def get_short_name(self):
         return self.name
 
@@ -77,17 +78,36 @@ class student(AbstractBaseUser):
 
 
 class student_scores(models.Model):
-    username=models.ForeignKey(student,on_delete=models.CASCADE)
+    username=models.OneToOneField(student,on_delete=models.CASCADE)
     creativiy=models.IntegerField(default=0)
     presentation=models.IntegerField(default=0)
     overall=models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.username
+
+    def __unicode__(self):
+        return self.username
+
+
 class colleges(models.Model):
-    college_name = models.CharField(max_length=150,default='')
+    name = models.CharField(max_length=150,default='',unique=True)
     college_number = models.CharField(max_length=10)
-    college_email = models.EmailField()
+    college_email = models.EmailField(default='')
+
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name
 
 
 class clubs(models.Model):
-    college_name = models.ForeignKey(colleges,on_delete=models.CASCADE,default='')
+    name = models.ForeignKey(colleges,on_delete=models.CASCADE,default='')
     club_name = models.CharField(max_length=100,default='')
+
+    def __str__(self):
+        return self.club_name
+
+    def __unicode__(self):
+        return self.club_name
